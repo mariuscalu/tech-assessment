@@ -61,12 +61,10 @@ class CrawlerActor(dbService: DbService) extends Actor with JsonSupport {
   }
 
   def sendRequest(url: String, token: Option[String]): Future[HttpResponse] = {
-    println(url)
-    val url2 = "http://localhost/db.json"
     val header = headers.Authorization(OAuth2BearerToken(token.get))
 
     Http()
-      .singleRequest(HttpRequest(uri = url2, headers = List(header)))
+      .singleRequest(HttpRequest(uri = url, headers = List(header)))
   }
 
   def getToken(domain: String): Future[Option[String]] =
